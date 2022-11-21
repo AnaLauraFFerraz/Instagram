@@ -8,7 +8,7 @@ export default function NavBarMobile(){
                 </div>
 
                 <div className="instagram-mobile">
-                    <img src="../../public/assets/img/logo.png" />
+                    <img src="./assets/img/logo.png" />
                 </div>
 
                 <div className="icones-mobile">

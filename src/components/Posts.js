@@ -33,20 +33,6 @@ function Post(props) {
             SetLiked();
     }
 
-    /*function ToggleLikeIcon() {
-        if (isLikeActive) {
-            setLikeName("heart-outline");
-            setLikeClass("");
-            setLikeActive(!isLikeActive);
-            setContLikes(likesBalance);
-        } else {
-            setLikeName("heart");
-            setLikeClass("liked-icon");
-            setLikeActive(!isLikeActive);
-            setContLikes(likesBalance + 1);
-        }
-    };*/
-
     function ToggleSaveIcon() {
         if (isSaveActive) {
             setSaveName("bookmark-outline");
@@ -60,7 +46,7 @@ function Post(props) {
     };
 
     return (
-        <div className="post">
+        <div className="post" data-test="post">
             <div className="topo">
                 <div className="usuario">
                     <img src={props.userPic} />
@@ -72,14 +58,14 @@ function Post(props) {
             </div>
 
             <div className="conteudo" onDoubleClick={DoubleClickHandle}>
-                <img src={props.postContent} alt="post" />
+                <img src={props.postContent} data-test="post-image" />
             </div>
 
             <div className="fundo">
                 <div className="acoes">
                     <div>
                         <ion-icon
-                            id="idTest"
+                            data-test="like-post"
                             name={likeName}
                             class={likeClass}
                             onClick={isLikeActive ? SetDisliked : SetLiked}
@@ -90,6 +76,7 @@ function Post(props) {
                     </div>
                     <div>
                         <ion-icon
+                            data-test="save-post"
                             name={saveName}
                             className={saveClass}
                             onClick={ToggleSaveIcon}
@@ -98,7 +85,7 @@ function Post(props) {
                 </div>
                 <div className="curtidas">
                     <img src={props.userPicLiked} alt="post" />
-                    <div className="texto">
+                    <div className="texto" data-test="likes-number">
                         Curtido por <strong>{props.likedBy}</strong> e <strong>outras {contLikes.toString()} pessoas</strong>
                     </div>
                 </div>

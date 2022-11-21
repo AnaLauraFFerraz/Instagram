@@ -13,13 +13,13 @@ function UserProfile(props) {
     }
 
     return (
-        <div className="usuario">
-            <img src={profilePic} onClick={setNewProfilePicture} />
-            <div className="texto">
+        <div className="usuario" data-test="user">
+            <img src={profilePic} onClick={setNewProfilePicture} data-test="profile-image" />
+            <div className="texto"> 
                 <strong>{props.username}</strong>
                 <span>
-                    {name}
-                    <ion-icon name="pencil" onClick={setNewName}></ion-icon>
+                    <div data-test="name">{name}</div>
+                    <ion-icon name="pencil" onClick={setNewName} data-test="edit-name"></ion-icon>
                 </span>
             </div>
         </div>

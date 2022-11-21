@@ -250,6 +250,11 @@ body {
   color: #8E8E8E;
 }
 
+.sidebar>.usuario .texto span {
+  display: flex;
+  margin-top: 4px;
+}
+
 .sidebar>.usuario .texto strong {
   font-weight: 500;
   color: #262626;
