@@ -1,24 +1,24 @@
 import React, { useState } from "react";
 
 function UserProfile(props) {
-    const [nome, setNome] = useState("");
-    const [imagem, setImagem] = useState(props.profilePic);
+    const [name, setName] = useState(props.name);
+    const [profilePic, setImg] = useState(props.profilePic);
 
     function setNewProfilePicture() {
-        setImagem(prompt("Insira um link para a sua foto de perfil:"));
+        setImg(prompt("Insira um link para a sua foto de perfil:"));
     }
 
     function setNewName() {
-        setNome(prompt("Qual seu nome?"));
+        setName(prompt("Qual seu nome?"));
     }
 
     return (
         <div className="usuario">
-            <img src={props.profilePic} onClick={setNewProfilePicture} />
+            <img src={profilePic} onClick={setNewProfilePicture} />
             <div className="texto">
-                <strong>{props.name}</strong>
+                <strong>{props.username}</strong>
                 <span>
-                    {props.username}
+                    {name}
                     <ion-icon name="pencil" onClick={setNewName}></ion-icon>
                 </span>
             </div>

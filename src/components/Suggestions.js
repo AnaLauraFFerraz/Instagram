@@ -5,8 +5,6 @@ function SuggestedProfile(props) {
             <div className="usuario">                  
                 <img src={props.profilePic} />
                 <div className="texto">
-                    <p>{props.user}</p>
-                    <p>{props.description}</p>
                     <div className="nome">{props.user}</div>
                     <div className="razao">{props.description}</div>
                 </div>
