@@ -3,45 +3,59 @@ import React, { useState } from "react";
 
 function Post(props) {
 
-    const [likeIconName, setLikeIconName] = useState("heart-outline");
-    const [likeIconClass, setLikeIconClass] = useState("");
-    const [isLikeActive, setLikeIconActive] = useState(false);
-    const [contLikes, setContLikes] = useState(0)
+    let likesBalance = props.likesNumber;
 
-    const [saveIconName, setSaveIconName] = useState("bookmark-outline");
-    const [saveIconClass, setSaveIconClass] = useState("");
-    const [isSaveActive, setSaveIconActive] = useState(false);
+    const [likeName, setLikeName] = useState("heart-outline");
+    const [likeClass, setLikeClass] = useState("");
+    const [isLikeActive, setLikeActive] = useState(false);
+    const [contLikes, setContLikes] = useState(likesBalance)
 
-    let likesBalance = props.likesNumber
+    const [saveName, setSaveName] = useState("bookmark-outline");
+    const [saveClass, setSaveClass] = useState("");
+    const [isSaveActive, setSaveActive] = useState(false);
+
+    function SetLiked() {
+        setLikeName("heart");
+        setLikeClass("liked-icon");
+        setLikeActive(true);
+        setContLikes(likesBalance + 1);
+    }
+
+    function SetDisliked() {
+        setLikeName("heart-outline");
+        setLikeClass("");
+        setLikeActive(!isLikeActive);
+        setContLikes(likesBalance);
+    }
 
     function DoubleClickHandle() {
         if (!isLikeActive)
-            ToggleLikeIcon();
+            SetLiked();
     }
 
-    function ToggleLikeIcon() {
+    /*function ToggleLikeIcon() {
         if (isLikeActive) {
-            setLikeIconName("heart-outline");
-            setLikeIconClass("");
-            setLikeIconActive(!isLikeActive);
+            setLikeName("heart-outline");
+            setLikeClass("");
+            setLikeActive(!isLikeActive);
             setContLikes(likesBalance);
         } else {
-            setLikeIconName("heart");
-            setLikeIconClass("liked-icon");
-            setLikeIconActive(!isLikeActive);
+            setLikeName("heart");
+            setLikeClass("liked-icon");
+            setLikeActive(!isLikeActive);
             setContLikes(likesBalance + 1);
         }
-    };
+    };*/
 
     function ToggleSaveIcon() {
         if (isSaveActive) {
-            setSaveIconName("bookmark-outline");
-            setSaveIconClass("");
-            setSaveIconActive(!isSaveActive);
+            setSaveName("bookmark-outline");
+            setSaveClass("");
+            setSaveActive(!isSaveActive);
         } else {
-            setSaveIconName("bookmark");
-            setSaveIconClass("saved-icon");
-            setSaveIconActive(!isSaveActive);
+            setSaveName("bookmark");
+            setSaveClass("saved-icon");
+            setSaveActive(!isSaveActive);
         }
     };
 
@@ -65,18 +79,19 @@ function Post(props) {
                 <div className="acoes">
                     <div>
                         <ion-icon
-                            name={likeIconName}
-                            className={likeIconClass}
-                            onClick={ToggleLikeIcon}
+                            id="idTest"
+                            name={likeName}
+                            class={likeClass}
+                            onClick={isLikeActive ? SetDisliked : SetLiked}
                         ></ion-icon>
-                        {console.log(likeIconClass)}
+                        {console.log(likeClass)}
                         <ion-icon name="chatbubble-outline"></ion-icon>
                         <ion-icon name="paper-plane-outline"></ion-icon>
                     </div>
                     <div>
                         <ion-icon
-                            name={saveIconName}
-                            className={saveIconClass}
+                            name={saveName}
+                            className={saveClass}
                             onClick={ToggleSaveIcon}
                         ></ion-icon>
                     </div>
