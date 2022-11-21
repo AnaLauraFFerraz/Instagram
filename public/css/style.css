@@ -204,9 +204,8 @@ body {
   margin-right: 6px;
 }
 
-ion-icon [name="heart"] {
+.liked-icon {
   color: red;
-  border: none;
 }
 
 .post .fundo .curtidas {

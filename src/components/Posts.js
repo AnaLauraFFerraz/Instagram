@@ -3,45 +3,44 @@ import React, { useState } from "react";
 
 function Post(props) {
 
-    const [likeIconName, setIconName] = useState("heart-outline");
-    const [likeIconClass, setIconClass] = useState("not-liked-icon");
-    const [isLikeActive, setIconActive] = useState(false);
+    const [likeIconName, setLikeIconName] = useState("heart-outline");
+    const [likeIconClass, setLikeIconClass] = useState("");
+    const [isLikeActive, setLikeIconActive] = useState(false);
+    const [contLikes, setContLikes] = useState(0)
 
-    const [saveIconSaveName, setSaveIconName] = useState("bookmark-outline");
-    const [saveIconClass, setSaveIconClass] = useState("not-liked-icon");
+    const [saveIconName, setSaveIconName] = useState("bookmark-outline");
+    const [saveIconClass, setSaveIconClass] = useState("");
     const [isSaveActive, setSaveIconActive] = useState(false);
 
-    let likesBalance = 0;
-    let contLikes = 0;
+    let likesBalance = props.likesNumber
 
-    //Inserir contador de likes
-    //let numberOfLikes = props.likesNumber;
+    function DoubleClickHandle() {
+        if (!isLikeActive)
+            ToggleLikeIcon();
+    }
+
     function ToggleLikeIcon() {
-        if (!isLikeActive) {
-            setIconName("heart");
-            setIconClass("liked-icon");
-            setIconActive(!isLikeActive);
-            contLikes++;
-            likesBalance = props.likesNumber + contLikes;
+        if (isLikeActive) {
+            setLikeIconName("heart-outline");
+            setLikeIconClass("");
+            setLikeIconActive(!isLikeActive);
+            setContLikes(likesBalance);
         } else {
-            setSaveIconName("heart-outline");
-            setSaveIconClass("not-liked-icon");
-            setIconActive(!isLikeActive);
-            contLikes -= 1;
-            likesBalance = props.likesNumber + contLikes;
+            setLikeIconName("heart");
+            setLikeIconClass("liked-icon");
+            setLikeIconActive(!isLikeActive);
+            setContLikes(likesBalance + 1);
         }
     };
 
-    //Inserir restrição de dislike onDoubleClick
-
     function ToggleSaveIcon() {
-        if (!isSaveActive) {
-            setIconName("bookmark");
-            setIconClass("liked-icon");
-            setIconActive(!isSaveActive);
+        if (isSaveActive) {
+            setSaveIconName("bookmark-outline");
+            setSaveIconClass("");
+            setSaveIconActive(!isSaveActive);
         } else {
-            setIconName("bookmark-outline");
-            setIconClass("not-liked-icon");
+            setSaveIconName("bookmark");
+            setSaveIconClass("saved-icon");
             setSaveIconActive(!isSaveActive);
         }
     };
@@ -58,32 +57,35 @@ function Post(props) {
                 </div>
             </div>
 
-            <div className="conteudo" onDoubleClick={ToggleLikeIcon}>
+            <div className="conteudo" onDoubleClick={DoubleClickHandle}>
                 <img src={props.postContent} alt="post" />
             </div>
 
             <div className="fundo">
-                <div className="container-acoes">
-                    <div className="acoes">
-                        <button onClick={ToggleLikeIcon}>
-                            <ion-icon name={likeIconName} className={likeIconClass}></ion-icon>
-                        </button>
+                <div className="acoes">
+                    <div>
+                        <ion-icon
+                            name={likeIconName}
+                            className={likeIconClass}
+                            onClick={ToggleLikeIcon}
+                        ></ion-icon>
+                        {console.log(likeIconClass)}
                         <ion-icon name="chatbubble-outline"></ion-icon>
                         <ion-icon name="paper-plane-outline"></ion-icon>
                     </div>
                     <div>
                         <ion-icon
-                            name={saveIconSaveName}
+                            name={saveIconName}
                             className={saveIconClass}
                             onClick={ToggleSaveIcon}
                         ></ion-icon>
                     </div>
                 </div>
-            </div>
-            <div className="curtidas">
-                <img src={props.userPicLiked} alt="post" />
-                <div className="texto">
-                    Curtido por <strong>{props.likedBy}</strong> e <strong>outras {likesBalance} pessoas</strong>
+                <div className="curtidas">
+                    <img src={props.userPicLiked} alt="post" />
+                    <div className="texto">
+                        Curtido por <strong>{props.likedBy}</strong> e <strong>outras {contLikes.toString()} pessoas</strong>
+                    </div>
                 </div>
             </div>
         </div>
@@ -99,7 +101,7 @@ export default function Posts() {
             postContent: "./assets/img/gato-telefone.svg",
             userPicLiked: "./assets/img/respondeai.svg",
             likedBy: "respondeai",
-            likesNumber: "101.523"
+            likesNumber: 101523
         },
         {
             user: "barked",
@@ -107,7 +109,7 @@ export default function Posts() {
             postContent: "./assets/img/dog.svg",
             userPicLiked: "./assets/img/adorable_animals.svg",
             likedBy: "adorable_animals",
-            likesNumber: "99.159"
+            likesNumber: 99159
         }
     ];
 
